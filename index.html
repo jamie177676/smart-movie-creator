@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF--8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- PWA enhancements -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#06b6d4" />
+
+    <title>Smart Movie Creator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom scrollbar for a better aesthetic */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1a202c;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #4a5568;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #718096;
+      }
+
+      /* Simple and accessible toggle switch */
+      .toggle-checkbox:checked {
+        @apply: right-0 border-cyan-500;
+        right: 0;
+        border-color: #06b6d4;
+      }
+      .toggle-checkbox:checked + .toggle-label {
+        @apply: bg-cyan-500;
+        background-color: #06b6d4;
+      }
+
+      /* Startup Animation */
+      @keyframes fade-in-scale {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      .animate-fade-in-scale {
+        animation: fade-in-scale 1s ease-out forwards;
+      }
+      @keyframes fade-in-subtle {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in-subtle {
+        animation: fade-in-subtle 1s ease-out forwards;
+        opacity: 0; /* Start hidden */
+      }
+
+      /* Animation for new assets */
+      @keyframes fade-in-fast {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      .animate-fade-in-fast {
+        animation: fade-in-fast 0.5s ease-out forwards;
+      }
+
+      /* Animation for updated assets */
+      @keyframes flash-border {
+        0%, 100% { border-color: #1f2937; } /* bg-gray-800 */
+        50% { border-color: #06b6d4; } /* cyan-500 */
+      }
+      .animate-flash-border {
+        animation: flash-border 1.5s ease-in-out;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.16.0",
+    "@capacitor/cli": "https://aistudiocdn.com/@capacitor/cli@^7.4.3"
+  }
+}
+</script>
+</head>
+  <body class="bg-gray-900 text-gray-100 font-sans">
+    <div id="root"></div>
+    <!-- Capacitor Bridge -->
+    <script src="capacitor.js"></script>
+    <script type="module" src="/index.tsx"></script>
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').then(registration => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

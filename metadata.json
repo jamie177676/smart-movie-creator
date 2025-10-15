@@ -1,0 +1,7 @@
+{
+  "name": " Smart Movie Creator",
+  "description": "An AI-powered application to transform your scripts into cinematic experiences. Upload your script, and watch as the AI generates characters, storyboards, and a complete video production.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
